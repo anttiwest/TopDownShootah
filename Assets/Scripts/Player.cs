@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class Player : MonoBehaviour {
 
     public GameObject player;
     public float speed;
     Vector3 movementDirection;
     float camRayLength = 100f;
-    int floorMask;
 
-	void Awake ()
+    void Awake()
     {
-        floorMask = LayerMask.GetMask("Floor");
+        
     }
-	
-	void FixedUpdate() {
+
+    void FixedUpdate()
+    {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         Move(h, v);
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit info;
 
-        if(Physics.Raycast(ray, out info))
+        if (Physics.Raycast(ray, out info))
         {
             Vector3 positionToLookAt = info.point;
             positionToLookAt.y = 0f;
