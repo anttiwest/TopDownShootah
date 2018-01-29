@@ -5,6 +5,13 @@ public class Player : MonoBehaviour {
     public GameObject player;
     public float speed;
     Vector3 movementDirection;
+    BulletSpawnPoint bulletSpawnPoint;
+    Bullet bullet;
+
+    private void Awake()
+    {
+        bulletSpawnPoint = GetComponentInChildren<BulletSpawnPoint>();
+    }
 
     void FixedUpdate()
     {
@@ -12,6 +19,11 @@ public class Player : MonoBehaviour {
         float v = Input.GetAxisRaw("Vertical");
         Move(h, v);
         Turn();
+
+        if (Input.GetMouseButton(0))
+        {
+            Fire();
+        }
     }
 
     void Move(float h, float v)
@@ -32,13 +44,11 @@ public class Player : MonoBehaviour {
             positionToLookAt.y = 0f;
             transform.LookAt(positionToLookAt);
         }
-
-        //Debug.DrawRay(ray.origin, 100 * ray.direction);
     }
 
-    void Shoot()
+    void Fire()
     {
-
+        Bullet.Instantiate(bullet, bulletSpawnPoint.transform.position, Quaternion.identity);
     }
 
     void Die()
