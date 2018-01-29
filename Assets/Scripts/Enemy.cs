@@ -4,30 +4,38 @@ public class Enemy : MonoBehaviour {
 
     public GameObject player;
     float speed = 2f;
-    Vector3 direction;
-    public float Hp;
+    public float health;
     bool nearPlayer;
 
     void Awake() {
-        Hp = 100;
+        health = 100;
         nearPlayer = false;
 	}
 	
 	void FixedUpdate () {
         transform.LookAt(player.transform);
 
-        if (!nearPlayer)
+        MoveToPlayer();
+        CheckLifeStatus();
+
+        
+    }
+
+    void CheckLifeStatus()
+    {
+        if (health <= 0)
         {
-            MoveToPlayer();
+            Destroy(this.gameObject);
         }
-        Debug.Log("is nearPlayer: " + nearPlayer);
     }
 
     void MoveToPlayer()
     {
-        direction = player.transform.position;
-        transform.position += Time.deltaTime * speed * direction.normalized;
+        float step = speed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
     }
+
+
 
     private void OnTriggerEnter(Collider other)
     {

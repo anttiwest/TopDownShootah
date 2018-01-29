@@ -5,12 +5,6 @@ public class Player : MonoBehaviour {
     public GameObject player;
     public float speed;
     Vector3 movementDirection;
-    float camRayLength = 100f;
-
-    void Awake()
-    {
-        
-    }
 
     void FixedUpdate()
     {
@@ -38,6 +32,17 @@ public class Player : MonoBehaviour {
             positionToLookAt.y = 0f;
             transform.LookAt(positionToLookAt);
         }
-        Debug.DrawRay(ray.origin, 100 * ray.direction);
+
+        //Debug.DrawRay(ray.origin, 100 * ray.direction);
+    }
+
+    void Shoot()
+    {
+
+    }
+
+    void Die()
+    {
+
     }
 }
