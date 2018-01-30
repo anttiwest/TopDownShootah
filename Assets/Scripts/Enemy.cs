@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger enter");
+        //Debug.Log("Trigger enter");
         if (other.gameObject.GetComponent<Player>())
         {
             nearPlayer = true;
@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Trigger exit");
+        //Debug.Log("Trigger exit");
         if (other.gameObject.GetComponent<Player>())
         {
             nearPlayer = false;

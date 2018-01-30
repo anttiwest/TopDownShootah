@@ -48,11 +48,12 @@ public class Player : MonoBehaviour {
         if (Input.GetMouseButton(0) && !isShooting)
         {
             shootParticles.Play();
+            //shootParticles.emission.rateOverTime = new ParticleSystem.MinMaxCurve(5, new AnimationCurve());
             isShooting = true;
         }
         else if (isShooting && !Input.GetMouseButton(0))
         {
-            shootParticles.Stop();
+            //shootParticles.Stop();
             isShooting = false;
         }
         shootParticles.transform.position = new Vector3(transform.position.x, shootParticles.transform.position.y, transform.position.z);

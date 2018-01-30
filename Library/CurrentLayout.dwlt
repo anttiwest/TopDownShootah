@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -42,10 +42,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 683, y: 492}
+  m_MinSize: {x: 681, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 11
+  controlID: 114
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -91,8 +91,8 @@ MonoBehaviour:
     y: 0
     width: 289
     height: 676
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -208,7 +208,7 @@ MonoBehaviour:
     y: 0
     width: 1516
     height: 947
-  m_MinSize: {x: 406, y: 492}
+  m_MinSize: {x: 404, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
   controlID: 12
@@ -232,8 +232,8 @@ MonoBehaviour:
     y: 0
     width: 1516
     height: 676
-  m_MinSize: {x: 406, y: 221}
-  m_MaxSize: {x: 8006, y: 4021}
+  m_MinSize: {x: 404, y: 221}
+  m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
   controlID: 13
 --- !u!114 &11
@@ -431,19 +431,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Materials
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Materials
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\antti\Unity Projects\Top-Down-Shootah
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 30260000
-    m_LastClickedID: 9776
-    m_ExpandedIDs: 00000000142600004e2600005026000000ca9a3bffffff7f
+    m_SelectedIDs: 4c260000
+    m_LastClickedID: 9804
+    m_ExpandedIDs: 00000000142600004c2600004e2600005026000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -587,23 +587,23 @@ MonoBehaviour:
     height: 655
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 744ffaff
+    m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 1afcffff000000007a260000
+    m_ExpandedIDs: 1afcffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Particle System
-      m_OriginalName: Particle System
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -60692
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 4
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
@@ -639,14 +639,14 @@ MonoBehaviour:
     width: 1223
     height: 655
   m_SceneLighting: 1
-  lastFramingTime: 104.63765249065393
+  lastFramingTime: 1204.198567383604
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.49216938, y: 0.24695492, z: 0.027570248}
+    m_Target: {x: 3.1339667, y: 2.5271602, z: -0.10721779}
     speed: 2
-    m_Value: {x: 0.49216938, y: 0.24695492, z: 0.027570248}
+    m_Value: {x: 3.1339667, y: 2.5271602, z: -0.10721779}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -669,13 +669,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.26252636, y: 0.09622703, z: -0.026313968, w: -0.9597601}
+    m_Target: {x: 0.24763922, y: -0.04390286, z: 0.011234093, w: 0.96780837}
     speed: 2
-    m_Value: {x: -0.26252484, y: 0.09622647, z: -0.026313813, w: -0.9597545}
+    m_Value: {x: 0.2476353, y: -0.043902162, z: 0.011233916, w: 0.96779305}
   m_Size:
-    m_Target: 16.348946
+    m_Target: 13.982104
     speed: 2
-    m_Value: 16.348946
+    m_Value: 13.982104
   m_Ortho:
     m_Target: 0
     speed: 2
