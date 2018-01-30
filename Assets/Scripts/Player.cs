@@ -5,29 +5,26 @@ public class Player : MonoBehaviour {
     public GameObject player;
     public float speed;
     Vector3 movementDirection;
-    BulletSpawnPoint bulletSpawnPoint;
-    Bullet bullet;
+    ParticleSystem shootParticles;
+    bool isShooting;
 
     private void Awake()
     {
-        bulletSpawnPoint = GetComponentInChildren<BulletSpawnPoint>();
+        shootParticles = GetComponentInChildren<ParticleSystem>();
+        isShooting = false;
     }
 
     void FixedUpdate()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        Move(h, v);
+        Move();
         Turn();
-
-        if (Input.GetMouseButton(0))
-        {
-            Fire();
-        }
+        Shoot();
     }
 
-    void Move(float h, float v)
+    void Move()
     {
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
         movementDirection.Set(h, 0, v);
         movementDirection = speed * Time.deltaTime * movementDirection.normalized;
         transform.position += movementDirection;
@@ -46,13 +43,18 @@ public class Player : MonoBehaviour {
         }
     }
 
-    void Fire()
+    void Shoot()
     {
-        Bullet.Instantiate(bullet, bulletSpawnPoint.transform.position, Quaternion.identity);
-    }
-
-    void Die()
-    {
-
+        if (Input.GetMouseButton(0) && !isShooting)
+        {
+            shootParticles.Play();
+            isShooting = true;
+        }
+        else if (isShooting && !Input.GetMouseButton(0))
+        {
+            shootParticles.Stop();
+            isShooting = false;
+        }
+        shootParticles.transform.position = new Vector3(transform.position.x, shootParticles.transform.position.y, transform.position.z);
     }
 }

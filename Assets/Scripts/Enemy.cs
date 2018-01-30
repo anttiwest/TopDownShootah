@@ -15,7 +15,11 @@ public class Enemy : MonoBehaviour {
 	void FixedUpdate () {
         transform.LookAt(player.transform);
 
-        MoveToPlayer();
+        if (!nearPlayer)
+        {
+            MoveToPlayer();
+        }
+        
         CheckLifeStatus();
 
         
