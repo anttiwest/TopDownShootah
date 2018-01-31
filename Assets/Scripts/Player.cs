@@ -9,10 +9,9 @@ public class Player : MonoBehaviour {
     bool isShooting;
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
-    //Vector3 positionToLookAt;
     float coolDown = 0;
     float fireRate = 0.3f;
-    float shotSpeed = 20f;
+    float shotSpeed = 30f;
 
     private void Awake()
     {
@@ -80,5 +79,13 @@ public class Player : MonoBehaviour {
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
         bullet.GetComponent<Rigidbody>().velocity = transform.forward * shotSpeed;
         Destroy(bullet, 2f);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<OutOfBounds>())
+        {
+            transform.position.Set(0, 2, 0);
+        }
     }
 }
