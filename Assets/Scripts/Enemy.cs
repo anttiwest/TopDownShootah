@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour {
     float speed = 2f;
     public float health;
     bool nearPlayer;
+    public EnemySpawner spawner;
 
     void Awake() {
         health = 100;
@@ -30,6 +31,7 @@ public class Enemy : MonoBehaviour {
         if (health <= 0)
         {
             Destroy(this.gameObject);
+            spawner.SpawnEnemy();
         }
     }
 

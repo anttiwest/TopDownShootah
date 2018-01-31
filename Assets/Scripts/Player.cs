@@ -26,10 +26,14 @@ public class Player : MonoBehaviour {
 
         Move();
         Turn();
-        if (Input.GetMouseButton(0)  && (coolDown <0))
+        
+        if (Input.GetMouseButton(0))
         {
-            ShootObjects();
-            coolDown = fireRate;
+            if (coolDown < 0)
+            {
+                ShootObjects();
+                coolDown = fireRate;
+            }
         }
     }
 
