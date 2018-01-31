@@ -7,6 +7,9 @@ public class Player : MonoBehaviour {
     Vector3 movementDirection;
     ParticleSystem shootParticles;
     bool isShooting;
+    public GameObject bulletPrefab;
+    public Transform bulletSpawn;
+    Vector3 positionToLookAt;
 
     private void Awake()
     {
@@ -18,7 +21,10 @@ public class Player : MonoBehaviour {
     {
         Move();
         Turn();
-        Shoot();
+        if (Input.GetMouseButton(0))
+        {
+            ShootObjects();
+        }
     }
 
     void Move()
@@ -37,25 +43,32 @@ public class Player : MonoBehaviour {
 
         if (Physics.Raycast(ray, out info))
         {
-            Vector3 positionToLookAt = info.point;
+            positionToLookAt = info.point;
             positionToLookAt.y = 0f;
             transform.LookAt(positionToLookAt);
         }
     }
 
-    void Shoot()
+    void ShootParticles()
     {
         if (Input.GetMouseButton(0) && !isShooting)
         {
             shootParticles.Play();
-            //shootParticles.emission.rateOverTime = new ParticleSystem.MinMaxCurve(5, new AnimationCurve());
             isShooting = true;
         }
         else if (isShooting && !Input.GetMouseButton(0))
         {
-            //shootParticles.Stop();
+            shootParticles.Stop();
             isShooting = false;
         }
         shootParticles.transform.position = new Vector3(transform.position.x, shootParticles.transform.position.y, transform.position.z);
+    }
+
+    void ShootObjects()
+    {
+        bulletSpawn.transform.position = new Vector3(transform.position.x, bulletSpawn.transform.position.y, transform.position.z);
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
+        bullet.GetComponent<Rigidbody>().velocity = positionToLookAt * 6;
+        Destroy(bullet, 2f);
     }
 }
