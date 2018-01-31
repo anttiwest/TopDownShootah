@@ -9,7 +9,10 @@ public class Player : MonoBehaviour {
     bool isShooting;
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
-    Vector3 positionToLookAt;
+    //Vector3 positionToLookAt;
+    float coolDown = 0;
+    float fireRate = 0.3f;
+    float shotSpeed = 20f;
 
     private void Awake()
     {
@@ -19,11 +22,14 @@ public class Player : MonoBehaviour {
 
     void FixedUpdate()
     {
+        coolDown -= Time.deltaTime;
+
         Move();
         Turn();
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0)  && (coolDown <0))
         {
             ShootObjects();
+            coolDown = fireRate;
         }
     }
 
@@ -43,7 +49,7 @@ public class Player : MonoBehaviour {
 
         if (Physics.Raycast(ray, out info))
         {
-            positionToLookAt = info.point;
+            Vector3 positionToLookAt = info.point;
             positionToLookAt.y = 0f;
             transform.LookAt(positionToLookAt);
         }
@@ -68,7 +74,7 @@ public class Player : MonoBehaviour {
     {
         bulletSpawn.transform.position = new Vector3(transform.position.x, bulletSpawn.transform.position.y, transform.position.z);
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
-        bullet.GetComponent<Rigidbody>().velocity = positionToLookAt * 6;
+        bullet.GetComponent<Rigidbody>().velocity = transform.forward * shotSpeed;
         Destroy(bullet, 2f);
     }
 }
