@@ -2,13 +2,15 @@
 
 public class CameraFollow : MonoBehaviour {
 
-    public GameObject player;
+    GameObject player;
     Vector3 distance;
     float smoothing = 10f;
 
     private void Awake()
     {
+        player = GameObject.FindWithTag("Player");
         distance = transform.position - player.transform.position;
+        
     }
 
     void FixedUpdate ()
