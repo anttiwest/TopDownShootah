@@ -1,26 +1,40 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour {
 
     public GameObject enemyPrefab;
     public GameObject player;
     int enemiesAlive;
+    int score;
+    Canvas ui;
+    Text scoreBoard;
+
+    private void Awake()
+    {
+        ui = GameObject.FindWithTag("UI").GetComponentInChildren<Canvas>();
+        score = 0;
+        scoreBoard = ui.GetComponentInChildren<Text>();
+        scoreBoard.text = score.ToString();
+
+        Debug.Log(ui.name);
+        Debug.Log(scoreBoard.name);
+    }
 
     public void SpawnEnemy()
     {
-        float maxRange = 5f;
-        float minRange = 1f;
+        int maxRange = 5;
+        int minRange = 1;
 
-        int amount = Random.Range(1, 5);
+        int amount = Random.Range(minRange, maxRange);
         if (enemiesAlive < 4)
         {
-            
             for (int i = 0; i < amount; i++)
             {
                 float randomX;
                 float randomZ;
 
-                if (amount < (maxRange / 2))
+                if (amount < ((maxRange * 1.0f) / 2))
                 {
                     randomX = Random.Range(player.transform.position.x, player.transform.position.x + 10f);
                     randomZ = Random.Range(player.transform.position.z, player.transform.position.z + 10f);
@@ -36,12 +50,14 @@ public class EnemySpawner : MonoBehaviour {
                 enemiesAlive++;
             }
         }
-        //Debug.Log("spawned, enemies alive: " + enemiesAlive);
+        Debug.Log("spawned, enemies alive: " + enemiesAlive);
     }
 
     public void EnemyDied()
     {
         enemiesAlive--;
-        //Debug.Log("died, enemies alive: " + enemiesAlive);
+        score += 10;
+        scoreBoard.text = score.ToString();
+        Debug.Log("died, enemies alive: " + enemiesAlive + ", score: " + score);
     }
 }

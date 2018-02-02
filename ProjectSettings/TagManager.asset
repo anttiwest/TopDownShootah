@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Floor
   - EnemySpawner
+  - UI
+  - GameManager
   layers:
   - Default
   - TransparentFX

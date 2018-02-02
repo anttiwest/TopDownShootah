@@ -8,6 +8,9 @@ public class Enemy : MonoBehaviour {
     bool nearPlayer;
     EnemySpawner spawner;
     ParticleSystem damageEffect;
+    float damage;
+    float coolDown = 0;
+    float damageRate = 1f;
 
     void Awake() {
         health = 100;
@@ -15,9 +18,12 @@ public class Enemy : MonoBehaviour {
         player = GameObject.FindWithTag("Player");
         spawner = GameObject.FindWithTag("EnemySpawner").GetComponent<EnemySpawner>();
         damageEffect = GetComponentInChildren<ParticleSystem>();
+        damage = 20f;
     }
 	
 	void FixedUpdate () {
+
+        coolDown -= Time.deltaTime;
 
         transform.LookAt(player.transform);
         if (!nearPlayer)
@@ -54,6 +60,13 @@ public class Enemy : MonoBehaviour {
         if (other.gameObject.GetComponent<Player>())
         {
             nearPlayer = true;
+            Player target = player.GetComponent<Player>();
+            if (coolDown < 0)
+            {
+                target.Hurt(damage);
+                coolDown = damageRate;
+            }
+            
         }
 
         if (other.gameObject.GetComponent<OutOfBounds>())
