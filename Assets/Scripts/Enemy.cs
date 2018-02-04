@@ -1,14 +1,11 @@
 ﻿using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : Character {
 
     GameObject player;
-    float speed = 4.5f;
-    public float health;
     bool nearPlayer;
     EnemySpawner spawner;
     ParticleSystem damageEffect;
-    float damage;
     float coolDown = 0;
     float damageRate = 1f;
 
@@ -19,6 +16,7 @@ public class Enemy : MonoBehaviour {
         spawner = GameObject.FindWithTag("EnemySpawner").GetComponent<EnemySpawner>();
         damageEffect = GetComponentInChildren<ParticleSystem>();
         damage = 20f;
+        speed = 3f;
     }
 	
 	void FixedUpdate () {
@@ -38,24 +36,33 @@ public class Enemy : MonoBehaviour {
     {
         if (health <= 0)
         {
-            Die();
+            Die(gameObject);
+            spawner.SpawnEnemy();
+            spawner.EnemyDied();
         }
-    }
-
-    void Die()
-    {
-        Destroy(gameObject);
-        spawner.SpawnEnemy();
-        spawner.EnemyDied();
     }
 
     void MoveToPlayer()
     {
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
+        Debug.Log("MOVING TO PLAYER");
     }
 
     private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<Player>())
+        {
+            nearPlayer = true;
+        }
+
+        if (other.gameObject.GetComponent<OutOfBounds>())
+        {
+            Die(gameObject);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.GetComponent<Player>())
         {
@@ -66,12 +73,7 @@ public class Enemy : MonoBehaviour {
                 target.Hurt(damage);
                 coolDown = damageRate;
             }
-            
-        }
 
-        if (other.gameObject.GetComponent<OutOfBounds>())
-        {
-            Die();
         }
     }
 

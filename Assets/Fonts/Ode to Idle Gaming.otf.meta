@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 8a958608142e0e144b0c93d830c69110
+timeCreated: 1517662993
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Ode to Idle Gaming
+  fontNames:
+  - Ode to Idle Gaming
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour {
+public class Player : Character {
 
     public GameObject player;
-    public float speed;
     Vector3 movementDirection;
     ParticleSystem shootParticles;
     bool isShooting;
@@ -13,14 +12,13 @@ public class Player : MonoBehaviour {
     float coolDown = 0;
     float fireRate = 0.3f;
     float shotSpeed = 30f;
-    float hp;
     ParticleSystem damageEffect;
 
     private void Awake()
     {
         shootParticles = GetComponentInChildren<ParticleSystem>();
         isShooting = false;
-        hp = 100f;
+        health = 100f;
         damageEffect = GetComponentInChildren<ParticleSystem>();
     }
 
@@ -97,22 +95,15 @@ public class Player : MonoBehaviour {
 
     public void Hurt(float amount)
     {
-        hp -= amount;
+        TakeDamage(amount);
         damageEffect.Play();
-        Debug.Log("Player hurt, hp: " + hp);
     }
 
     void CheckStatus()
     {
-        if(hp <= 0)
+        if(health <= 0)
         {
-            Destroy(gameObject);
-            coolDown = 3f;
-            if(coolDown < 0)
-            {
-                SceneManager.LoadScene("scene001");
-            }
-            
+            Die(gameObject);
         }
     }
 }

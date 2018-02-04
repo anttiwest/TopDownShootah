@@ -58,6 +58,5 @@ public class EnemySpawner : MonoBehaviour {
         enemiesAlive--;
         score += 10;
         scoreBoard.text = score.ToString();
-        Debug.Log("died, enemies alive: " + enemiesAlive + ", score: " + score);
     }
 }
