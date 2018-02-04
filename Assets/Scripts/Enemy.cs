@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : Character {
 
@@ -8,6 +9,7 @@ public class Enemy : Character {
     ParticleSystem damageEffect;
     float coolDown = 0;
     float damageRate = 1f;
+    NavMeshAgent meshNavigator;
 
     void Awake() {
         health = 100;
@@ -17,6 +19,7 @@ public class Enemy : Character {
         damageEffect = GetComponentInChildren<ParticleSystem>();
         damage = 20f;
         speed = 3f;
+        meshNavigator = GetComponent<NavMeshAgent>();
     }
 	
 	void FixedUpdate () {
@@ -44,9 +47,11 @@ public class Enemy : Character {
 
     void MoveToPlayer()
     {
-        float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
-        Debug.Log("MOVING TO PLAYER");
+        meshNavigator.destination = player.transform.position;
+
+        //old movement
+        //float step = speed * Time.deltaTime;
+        //transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
     }
 
     private void OnTriggerEnter(Collider other)
