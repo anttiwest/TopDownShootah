@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class EnemySpawner : MonoBehaviour {
 
     public GameObject enemyPrefab;
-    public GameObject player;
+    private GameObject player;
     int enemiesAlive;
     int score;
     Canvas ui;
@@ -12,13 +12,11 @@ public class EnemySpawner : MonoBehaviour {
 
     private void Awake()
     {
+        player = GameObject.FindWithTag("Player");
         ui = GameObject.FindWithTag("UI").GetComponentInChildren<Canvas>();
         score = 0;
         scoreBoard = ui.GetComponentInChildren<Text>();
         scoreBoard.text = score.ToString();
-
-        Debug.Log(ui.name);
-        Debug.Log(scoreBoard.name);
     }
 
     public void SpawnEnemy()
