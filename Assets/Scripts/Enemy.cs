@@ -31,7 +31,6 @@ public class Enemy : Character {
         {
             MoveToPlayer();
         }
-        
         CheckLifeStatus();
     }
 

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Player : Character {
 
@@ -13,6 +12,11 @@ public class Player : Character {
     float fireRate = 0.3f;
     float shotSpeed = 30f;
     ParticleSystem damageEffect;
+    float jumpForce;
+    Vector3 jumpMovement;
+    Rigidbody playerRigidbody;
+    bool isGrounded;
+    Quaternion playerRotation;
 
     private void Awake()
     {
@@ -20,15 +24,32 @@ public class Player : Character {
         isShooting = false;
         health = 100f;
         damageEffect = GetComponentInChildren<ParticleSystem>();
+        jumpForce = 25f;
+        playerRigidbody = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
     {
         coolDown -= Time.deltaTime;
 
-        Move();
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+
+        Move(h, v);
         Turn();
-        
+
+        if (Input.GetKeyDown("space") && isGrounded)
+        {
+            
+            Jump(h, v);
+        }
+
+        if (!isGrounded)
+        {
+            playerRigidbody.AddForce(new Vector3(0, -50, 0));
+            transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
+        }
+
         if (Input.GetMouseButton(0))
         {
             if (coolDown < 0)
@@ -37,13 +58,17 @@ public class Player : Character {
                 coolDown = fireRate;
             }
         }
-        CheckStatus();
+        CheckLifeStatus();
     }
 
-    void Move()
+    void Jump(float h, float v)
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
+        jumpMovement.Set(h, jumpForce, v);
+        playerRigidbody.velocity += jumpMovement;
+    }
+
+    void Move(float h, float v)
+    {
         movementDirection.Set(h, 0, v);
         movementDirection = speed * Time.deltaTime * movementDirection.normalized;
         transform.position += movementDirection;
@@ -99,11 +124,27 @@ public class Player : Character {
         damageEffect.Play();
     }
 
-    void CheckStatus()
+    void CheckLifeStatus()
     {
         if(health <= 0)
         {
             Die(gameObject);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.isStatic)
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.isStatic)
+        {
+            isGrounded = false;
         }
     }
 }
