@@ -48,7 +48,6 @@ public class EnemySpawner : MonoBehaviour {
                 enemiesAlive++;
             }
         }
-        Debug.Log("spawned, enemies alive: " + enemiesAlive);
     }
 
     public void EnemyDied()

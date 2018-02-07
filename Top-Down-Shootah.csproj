@@ -76,11 +76,11 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
     </Reference>
-    <Reference Include="TextMeshPro-2017.1-1.0.56-Runtime">
-      <HintPath>Assets\Downloaded\TextMesh Pro\Plugins\Editor DLL\TextMeshPro-2017.1-1.0.56-Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="TextMeshPro-2017.1-1.0.56-Editor">
       <HintPath>Assets\Downloaded\TextMesh Pro\Plugins\Editor DLL\TextMeshPro-2017.1-1.0.56-Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="TextMeshPro-2017.1-1.0.56-Runtime">
+      <HintPath>Assets\Downloaded\TextMesh Pro\Plugins\Editor DLL\TextMeshPro-2017.1-1.0.56-Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -120,6 +120,7 @@
     <Compile Include="Assets\Scripts\BulletSpawnPoint.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Character.cs" />
+    <Compile Include="Assets\Scripts\Crosshair.cs" />
     <Compile Include="Assets\Scripts\DamageParticle.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\EnemySpawner.cs" />
