@@ -23,7 +23,7 @@ public class Enemy : Character {
     }
 	
 	void FixedUpdate () {
-
+        
         coolDown -= Time.deltaTime;
 
         transform.LookAt(player.transform);
@@ -47,7 +47,6 @@ public class Enemy : Character {
     void MoveToPlayer()
     {
         meshNavigator.destination = player.transform.position;
-
         //old movement
         //float step = speed * Time.deltaTime;
         //transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
