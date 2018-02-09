@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
     void Awake()
     {
         player = GameObject.FindWithTag("Player");
+        Cursor.visible = false;
     }
 
     void FixedUpdate()
@@ -20,6 +21,7 @@ public class GameController : MonoBehaviour {
 
     public void RestartGame()
     {
-        SceneManager.LoadScene("scene001");
+        string scene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(scene);
     }
 }
