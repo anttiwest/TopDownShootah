@@ -116,20 +116,21 @@
     <Compile Include="Assets\Downloaded\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\Downloaded\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\Downloaded\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
-    <Compile Include="Assets\Scripts\Bullet.cs" />
-    <Compile Include="Assets\Scripts\BulletSpawnPoint.cs" />
-    <Compile Include="Assets\Scripts\CameraFollow.cs" />
-    <Compile Include="Assets\Scripts\Character.cs" />
-    <Compile Include="Assets\Scripts\Crosshair.cs" />
-    <Compile Include="Assets\Scripts\DamageParticle.cs" />
-    <Compile Include="Assets\Scripts\Enemy.cs" />
-    <Compile Include="Assets\Scripts\EnemySpawner.cs" />
-    <Compile Include="Assets\Scripts\GameController.cs" />
-    <Compile Include="Assets\Scripts\Health.cs" />
-    <Compile Include="Assets\Scripts\OutOfBounds.cs" />
-    <Compile Include="Assets\Scripts\Player\Player.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerShooting.cs" />
+    <Compile Include="Assets\Scripts\Characters\Character.cs" />
+    <Compile Include="Assets\Scripts\Characters\Enemy\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Characters\Enemy\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\Characters\Enemy\EnemySpawner.cs" />
+    <Compile Include="Assets\Scripts\Characters\Player\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\Characters\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Characters\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Characters\Player\PlayerShooting.cs" />
+    <Compile Include="Assets\Scripts\Combat\Shooting\Bullet.cs" />
+    <Compile Include="Assets\Scripts\Combat\Shooting\BulletSpawnPoint.cs" />
+    <Compile Include="Assets\Scripts\Control\GameController.cs" />
+    <Compile Include="Assets\Scripts\Control\OutOfBounds.cs" />
+    <Compile Include="Assets\Scripts\Effects\DamageParticle.cs" />
+    <Compile Include="Assets\Scripts\UI\Crosshair.cs" />
+    <Compile Include="Assets\Scripts\UI\Health.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Downloaded\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
