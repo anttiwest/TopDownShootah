@@ -20,7 +20,7 @@ public class EnemyMovement : Enemy {
         transform.LookAt(player.transform);
         if (!nearPlayer)
         {
-            MoveToPlayer();
+            //  MoveToPlayer();
         }
     }
 

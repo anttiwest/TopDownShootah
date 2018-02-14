@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.1.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -121,18 +119,19 @@
     <Compile Include="Assets\Scripts\Characters\Character.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemy\EnemyMovement.cs" />
-    <Compile Include="Assets\Scripts\Characters\Enemy\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerShooting.cs" />
+    <Compile Include="Assets\Scripts\Characters\Player\WeaponHandling.cs" />
     <Compile Include="Assets\Scripts\Combat\Shooting\Bullet.cs" />
     <Compile Include="Assets\Scripts\Combat\Shooting\BulletSpawnPoint.cs" />
+    <Compile Include="Assets\Scripts\Control\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\Control\GameController.cs" />
     <Compile Include="Assets\Scripts\Control\OutOfBounds.cs" />
+    <Compile Include="Assets\Scripts\Control\UI\Crosshair.cs" />
+    <Compile Include="Assets\Scripts\Control\UI\Health.cs" />
     <Compile Include="Assets\Scripts\Effects\DamageParticle.cs" />
-    <Compile Include="Assets\Scripts\UI\Crosshair.cs" />
-    <Compile Include="Assets\Scripts\UI\Health.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Downloaded\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
