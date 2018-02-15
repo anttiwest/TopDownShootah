@@ -14,14 +14,7 @@ public class WeaponHandling : MonoBehaviour {
 
     GameObject gun;
     GameObject sword;
-
-    public enum WeaponEquipped
-    {
-        Melee,
-        Ranged
-    };
-
-    WeaponEquipped equipped;
+    static Equipped equipped;
 
     private void Awake()
     {
@@ -39,7 +32,7 @@ public class WeaponHandling : MonoBehaviour {
 
         swordSheatedPos = sword.transform.position;
         swordSheatedRot = sword.transform.rotation;
-        equipped = WeaponEquipped.Ranged;
+        equipped = Equipped.Ranged;
     }
 
     private void FixedUpdate()
@@ -54,8 +47,8 @@ public class WeaponHandling : MonoBehaviour {
     {
         switch (equipped)
         {
-            case WeaponEquipped.Ranged:
-                equipped = WeaponEquipped.Melee;
+            case Equipped.Ranged:
+                equipped = Equipped.Melee;
 
                 sword.transform.localPosition = swordEquippedPos;
                 sword.transform.localRotation = swordEquippedRot;
@@ -63,8 +56,9 @@ public class WeaponHandling : MonoBehaviour {
                 gun.transform.localPosition = gunInHolsterPos;
                 gun.transform.localRotation = gunInHolsterRot;
                 break;
-            case WeaponEquipped.Melee:
-                equipped = WeaponEquipped.Ranged;
+
+            case Equipped.Melee:
+                equipped = Equipped.Ranged;
 
                 gun.transform.localPosition = gunEquippedPos;
                 gun.transform.localRotation = gunEquippedRot;
@@ -73,5 +67,10 @@ public class WeaponHandling : MonoBehaviour {
                 sword.transform.localRotation = swordSheatedRot;
                 break;
         }
+    }
+
+    public static Equipped GetEquippedWeapon()
+    {
+        return equipped;
     }
 }

@@ -15,7 +15,10 @@ public class CameraFollow : MonoBehaviour {
 
     void FixedUpdate ()
     {
-        LookAtPlayer();
+        if (player)
+        {
+            LookAtPlayer();
+        }
     }
 
     void LookAtPlayer()

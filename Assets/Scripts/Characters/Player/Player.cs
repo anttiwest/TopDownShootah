@@ -1,8 +1,15 @@
 ﻿using UnityEngine;
 
+public enum Equipped
+{
+    Melee,
+    Ranged
+};
+
 public class Player : Character {
     
     ParticleSystem damageEffect;
+    internal Equipped equipped;
 
     private void Awake()
     {

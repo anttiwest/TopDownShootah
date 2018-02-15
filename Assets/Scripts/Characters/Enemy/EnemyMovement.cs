@@ -17,10 +17,14 @@ public class EnemyMovement : Enemy {
 
     private void FixedUpdate()
     {
-        transform.LookAt(player.transform);
+        if (player)
+        {
+            transform.LookAt(player.transform);
+        }
+
         if (!nearPlayer)
         {
-            //  MoveToPlayer();
+            MoveToPlayer();
         }
     }
 

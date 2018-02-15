@@ -13,6 +13,7 @@ public class Enemy : Character {
         spawner = GameObject.FindWithTag("EnemySpawner").GetComponent<EnemySpawner>();
         damageEffect = GetComponentInChildren<ParticleSystem>();
         damage = 20f;
+        player = GameObject.FindWithTag("Player");
     }
 	
 	void FixedUpdate () {

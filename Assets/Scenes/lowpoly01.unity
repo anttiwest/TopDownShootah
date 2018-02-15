@@ -2975,6 +2975,11 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 7d69c83195bdc14478596db5ba60553b, type: 3}
   m_PrefabInternal: {fileID: 223605468}
+--- !u!1 &224596217 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1129958995822172, guid: a0b71e4b0aceebd44b03427e2b98dd6f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1561015681}
 --- !u!1001 &226456618
 Prefab:
   m_ObjectHideFlags: 0
@@ -10926,6 +10931,11 @@ Prefab:
       propertyPath: m_TagString
       value: EnemySpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 114281805759179720, guid: cd8b1bafe38fa6247b4fd3c62279f329,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 224596217}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd8b1bafe38fa6247b4fd3c62279f329, type: 2}
   m_IsPrefabParent: 0
