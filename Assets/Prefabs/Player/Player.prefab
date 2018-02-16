@@ -354,9 +354,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98d9745b65c4a984888e15fdabf6151b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  health: 100
-  damage: 100
 --- !u!114 &114150928345110912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -368,9 +365,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 765aebc4f4f9d2d48a1fb5ffe95933a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  health: 0
-  damage: 0
   bulletPrefab: {fileID: 1992763622831994, guid: 225b61a97c2c0ae44a870bfce234b78f,
     type: 2}
   bulletSpawn: {fileID: 4977301893477660}
@@ -385,9 +379,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03524adac61bc354fb933176c02ba171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  health: 0
-  damage: 0
 --- !u!114 &114802237226815220
 MonoBehaviour:
   m_ObjectHideFlags: 1

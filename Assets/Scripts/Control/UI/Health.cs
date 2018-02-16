@@ -9,7 +9,7 @@ public class Health : MonoBehaviour {
     private void Awake()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        healthDisplay = GameObject.Find("Health").GetComponent<Text>();
+        healthDisplay = GetComponent<Text>();
     }
 
     private void FixedUpdate()
