@@ -25,16 +25,16 @@ public class PlayerMovement : Player {
         
         transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
 
-        //if (Input.GetKeyDown("space") && isGrounded)
-        //{
-        //    Jump(h, v);
-        //}
+        if (Input.GetKeyDown("space") && isGrounded)
+        {
+            Jump(h, v);
+        }
 
-        //if (!isGrounded)
-        //{
-        //    playerRigidbody.AddForce(new Vector3(0, -50, 0));
-        //    transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
-        //}
+        if (!isGrounded)
+        {
+            playerRigidbody.AddForce(new Vector3(0, -50, 0));
+            transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
+        }
     }
 
     void Jump(float h, float v)
