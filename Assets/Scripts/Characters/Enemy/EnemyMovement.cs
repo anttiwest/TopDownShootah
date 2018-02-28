@@ -21,6 +21,8 @@ public class EnemyMovement : Enemy {
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         Debug.Log("noticed: " + playerNoticed);
         LookForPlayer();
+
+        
     }
 
     void LookForPlayer()
@@ -44,11 +46,21 @@ public class EnemyMovement : Enemy {
         {
             playerNoticed = false;
         }
+
+        if (!playerNoticed && transform.position != spawnLocation)
+        {
+            MoveToSpawnLocation();
+        }
     }
 
     void MoveToPlayer()
     {
         meshNavigator.destination = player.transform.position;
+    }
+
+    void MoveToSpawnLocation()
+    {
+        meshNavigator.destination = spawnLocation;
     }
 
     private void OnTriggerEnter(Collider other)

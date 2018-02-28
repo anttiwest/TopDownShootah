@@ -9,6 +9,7 @@ public class Enemy : Character {
     float coolDown = 0;
     float damageRate = 1f;
     internal static bool playerNoticed;
+    internal static Vector3 spawnLocation;
 
     void Awake()
     {
@@ -18,6 +19,7 @@ public class Enemy : Character {
         damage = 20f;
         player = GameObject.FindWithTag("Player");
         playerNoticed = false;
+        spawnLocation = transform.position;
     }
 	
 	void FixedUpdate ()
