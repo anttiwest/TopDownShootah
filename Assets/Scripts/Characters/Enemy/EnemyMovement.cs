@@ -19,10 +19,7 @@ public class EnemyMovement : Enemy {
     private void FixedUpdate()
     {
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-        Debug.Log("noticed: " + playerNoticed);
         LookForPlayer();
-
-        
     }
 
     void LookForPlayer()

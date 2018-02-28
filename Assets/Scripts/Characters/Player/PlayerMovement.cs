@@ -35,6 +35,15 @@ public class PlayerMovement : Player {
             playerRigidbody.AddForce(new Vector3(0, -50, 0));
             transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
         }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = 12.5f;
+        }
+        else
+        {
+            speed = 10f;
+        }
     }
 
     void Jump(float h, float v)
