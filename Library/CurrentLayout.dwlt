@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -72,7 +72,7 @@ MonoBehaviour:
   - {fileID: 14}
   - {fileID: 12}
   m_Selected: 0
-  m_LastSelected: 1
+  m_LastSelected: 2
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -145,7 +145,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &7
 MonoBehaviour:
@@ -431,19 +431,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scenes
+    - Assets
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\antti\Unity Projects\Top-Down-Shootah
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 393}
-    m_SelectedIDs: 96280000
-    m_LastClickedID: 10390
-    m_ExpandedIDs: 0000000076270000682800009a280000d628000074290000922a0000942a0000a82a0000162b0000c82b0000762c0000d42c0000162d0000362d0000b02d00004e2e00009a2e0000d22e0000d42e00005a2f0000303100004431000058310000f2310000003200002035000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: 74270000
+    m_LastClickedID: 10100
+    m_ExpandedIDs: 0000000074270000662800009a280000d628000074290000962a0000982a0000ac2a00001a2b0000cc2b00007a2c0000d82c00001a2d00003a2d0000b42d0000542e0000a02e0000d82e0000da2e0000602f0000363100004a3100005e310000fa310000083200005034000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -471,7 +471,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000076270000682800009a280000d628000074290000922a0000942a0000a82a0000162b0000382b0000c82b0000762c0000d42c0000162d0000362d0000b02d00004e2e00009a2e0000d22e0000d42e0000303100004431000058310000f23100000032000020350000
+    m_ExpandedIDs: 0000000074270000662800009a280000d628000074290000962a0000982a0000ac2a00001a2b0000cc2b00007a2c0000d82c00001a2d00003a2d0000b42d0000542e0000a02e0000d82e0000da2e0000602f0000363100004a3100005e310000fa3100000832000050340000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -587,9 +587,9 @@ MonoBehaviour:
     height: 609
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c4880000
-    m_LastClickedID: 35012
-    m_ExpandedIDs: 08affaff6a15fbff0e2efbff98bbfdff1afcffff00000000b6330000
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: 1afcffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -639,14 +639,14 @@ MonoBehaviour:
     width: 1223
     height: 609
   m_SceneLighting: 1
-  lastFramingTime: 18268.67310466799
+  lastFramingTime: 1642.4334553799763
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.007377088, y: 1, z: 0.15477481}
+    m_Target: {x: 8.71653, y: 0.3474735, z: 5.5122643}
     speed: 2
-    m_Value: {x: 0.007377088, y: 1, z: 0.15477481}
+    m_Value: {x: 8.71653, y: 0.3474735, z: 5.5122643}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -669,13 +669,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.29133, y: -0.090800576, z: 0.027789207, w: -0.9518979}
+    m_Target: {x: 0.030723853, y: 0.7496069, z: -0.0348815, w: 0.66025037}
     speed: 2
-    m_Value: {x: -0.29133004, y: -0.09080058, z: 0.02778921, w: -0.95189804}
+    m_Value: {x: 0.030723855, y: 0.7496069, z: -0.0348815, w: 0.6602504}
   m_Size:
-    m_Target: 6.3851266
+    m_Target: 38.848984
     speed: 2
-    m_Value: 6.3851266
+    m_Value: 38.848984
   m_Ortho:
     m_Target: 0
     speed: 2

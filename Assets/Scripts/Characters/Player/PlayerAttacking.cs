@@ -13,7 +13,6 @@ public class PlayerAttacking : Player {
         coolDown -= Time.deltaTime;
         if (Input.GetMouseButton(0))
         {
-            Debug.Log("equipped: " + WeaponHandling.GetEquippedWeapon());
             switch (WeaponHandling.GetEquippedWeapon())
             {
                 case Equipped.Ranged:

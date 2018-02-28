@@ -6,6 +6,7 @@ public class EnemyMovement : Enemy {
     GameObject player;
     bool nearPlayer;
     NavMeshAgent meshNavigator;
+    float distanceToPlayer;
 
     private void Awake()
     {
@@ -17,14 +18,31 @@ public class EnemyMovement : Enemy {
 
     private void FixedUpdate()
     {
-        if (player)
+        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        Debug.Log("noticed: " + playerNoticed);
+        LookForPlayer();
+    }
+
+    void LookForPlayer()
+    {
+        if (playerNoticed)
         {
             transform.LookAt(player.transform);
+            if (!nearPlayer)
+            {
+                MoveToPlayer();
+            }
         }
 
-        if (!nearPlayer)
+        if (distanceToPlayer <= 10)
         {
+            playerNoticed = true;
             MoveToPlayer();
+        }
+
+        if(distanceToPlayer >= 20 && playerNoticed)
+        {
+            playerNoticed = false;
         }
     }
 
