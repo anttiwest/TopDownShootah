@@ -2,9 +2,9 @@
 
 public class Character : MonoBehaviour {
 
-    public float speed;
-    public float health;
-    public float damage;
+    internal float speed;
+    internal float health;
+    internal float damage;
 
     public void Die(GameObject target)
     {

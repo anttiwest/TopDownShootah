@@ -22,6 +22,8 @@ public class PlayerMovement : Player {
         float v = Input.GetAxisRaw("Vertical");
         Move(h, v);
         Turn();
+        
+        transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
 
         if (Input.GetKeyDown("space") && isGrounded)
         {
@@ -32,6 +34,15 @@ public class PlayerMovement : Player {
         {
             playerRigidbody.AddForce(new Vector3(0, -50, 0));
             transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = 12.5f;
+        }
+        else
+        {
+            speed = 10f;
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : Character {
 
@@ -7,16 +8,22 @@ public class Enemy : Character {
     ParticleSystem damageEffect;
     float coolDown = 0;
     float damageRate = 1f;
+    internal static bool playerNoticed;
+    internal static Vector3 spawnLocation;
 
-    void Awake() {
+    void Awake()
+    {
         health = 100;
         spawner = GameObject.FindWithTag("EnemySpawner").GetComponent<EnemySpawner>();
         damageEffect = GetComponentInChildren<ParticleSystem>();
         damage = 20f;
+        player = GameObject.FindWithTag("Player");
+        playerNoticed = false;
+        spawnLocation = transform.position;
     }
 	
-	void FixedUpdate () {
-        
+	void FixedUpdate ()
+    {
         coolDown -= Time.deltaTime;
         CheckLifeStatus();
     }
@@ -47,6 +54,7 @@ public class Enemy : Character {
 
     public void TakeDamage(int amount)
     {
+        playerNoticed = true;
         health -= amount;
         damageEffect.Play();
     }
