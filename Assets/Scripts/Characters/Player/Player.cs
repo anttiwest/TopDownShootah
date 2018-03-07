@@ -10,6 +10,7 @@ public class Player : Character {
     
     ParticleSystem damageEffect;
     internal Equipped equipped;
+    
 
     private void Awake()
     {

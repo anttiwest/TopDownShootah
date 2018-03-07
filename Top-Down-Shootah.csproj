@@ -164,7 +164,6 @@
     <Compile Include="Assets\Scripts\Characters\Character.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Characters\Enemy\EnemyMovement.cs" />
-    <Compile Include="Assets\Scripts\Characters\Enemy\NewBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Characters\Player\PlayerAttacking.cs" />
@@ -177,6 +176,7 @@
     <Compile Include="Assets\Scripts\Control\OutOfBounds.cs" />
     <Compile Include="Assets\Scripts\Control\UI\Crosshair.cs" />
     <Compile Include="Assets\Scripts\Control\UI\Health.cs" />
+    <Compile Include="Assets\Scripts\Control\UI\Stamina.cs" />
     <Compile Include="Assets\Scripts\Effects\DamageParticle.cs" />
   </ItemGroup>
   <ItemGroup>
