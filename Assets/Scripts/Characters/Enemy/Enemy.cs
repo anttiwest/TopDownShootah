@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class Enemy : Character {
 
-    GameObject player;
+    internal static GameObject player;
     EnemySpawner spawner;
     ParticleSystem damageEffect;
     float coolDown = 0;

@@ -8,12 +8,12 @@ public class GameController : MonoBehaviour {
     void Awake()
     {
         player = GameObject.FindWithTag("Player");
-        Cursor.visible = false;
+        Cursor.visible = true;
     }
 
     void FixedUpdate()
     {
-        if (!GameObject.FindWithTag("Player"))
+        if (!GameObject.FindWithTag("Player") || Input.GetKeyDown(KeyCode.Escape))
         {
             RestartGame();
         }
@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour {
 
     public void RestartGame()
     {
-        string scene = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(scene);
+        //string scene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene("Menu");
     }
 }
