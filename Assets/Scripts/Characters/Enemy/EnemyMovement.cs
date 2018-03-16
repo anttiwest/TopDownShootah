@@ -2,8 +2,7 @@
 using UnityEngine.AI;
 
 public class EnemyMovement : Enemy {
-
-    GameObject player;
+    
     bool nearPlayer;
     NavMeshAgent meshNavigator;
     float distanceToPlayer;
@@ -11,7 +10,6 @@ public class EnemyMovement : Enemy {
     private void Awake()
     {
         nearPlayer = false;
-        player = GameObject.FindWithTag("Player");
         speed = 6f;
         meshNavigator = GetComponent<NavMeshAgent>();
     }

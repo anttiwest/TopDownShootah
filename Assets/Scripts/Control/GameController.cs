@@ -4,24 +4,28 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour {
 
     public GameObject player;
+    GoogleMobileAdverts googleAds;
 
     void Awake()
     {
         player = GameObject.FindWithTag("Player");
-        Cursor.visible = false;
+        Cursor.visible = true;
+        googleAds = GameObject.Find("AdSystem").GetComponent<GoogleMobileAdverts>();
     }
 
     void FixedUpdate()
     {
-        if (!GameObject.FindWithTag("Player"))
+        if (!GameObject.FindWithTag("Player") || Input.GetKeyDown(KeyCode.Escape))
         {
-            RestartGame();
+            LoadMenu();
         }
     }
 
-    public void RestartGame()
+    public void LoadMenu()
     {
-        string scene = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(scene);
+        googleAds.PlayRewardedVideo();
+
+        //string scene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene("Menu");
     }
 }
