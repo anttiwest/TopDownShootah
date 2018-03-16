@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerMovement : Player {
 
@@ -8,7 +9,7 @@ public class PlayerMovement : Player {
     Vector3 movementDirection;
     bool isGrounded;
     Rigidbody playerRigidbody;
-    float sprintSpeed;
+    float sprintSpeedMultip;
 
     //stamina
     internal float stamina;
@@ -18,30 +19,43 @@ public class PlayerMovement : Player {
     const float staminaIncreasePerFrame = 20.0f;
     const float staminaTimeToRegen = 3.0f;
 
+    Joystick leftJoystick;
 
     private void Awake()
     {
         speed = 10f;
-        sprintSpeed = 15f;
+        sprintSpeedMultip = 1.5f;
         jumpForce = 25f;
         playerRigidbody = GetComponent<Rigidbody>();
         stamina = 100f;
+        leftJoystick = GameObject.Find("LeftJoyStick").GetComponent<Joystick>();
     }
 
     private void FixedUpdate()
     {
+#if UNITY_ANDROID
+        float h = CrossPlatformInputManager.GetAxis("HorizontalLeft");
+        float v = CrossPlatformInputManager.GetAxis("VerticalLeft");
+        bool jumpPressed = false;
+#elif UNITY_IPHONE
+        float h = CrossPlatformInputManager.GetAxis("Horizontal");
+        float v = CrossPlatformInputManager.GetAxis("Vertical");
+        bool jumpPressed = false;
+#else
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
+        bool jumpPressed = Input.GetKeyDown("space");
+#endif
         Move(h, v);
         Turn();
-        
-        transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
 
-        if (Input.GetKeyDown("space") && isGrounded && stamina >= 50)
+        if (jumpPressed && isGrounded && stamina >= 50)
         {
             Jump(h, v);
             stamina -= 50f;
         }
+
+        transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
 
         if (!isGrounded)
         {
@@ -60,7 +74,7 @@ public class PlayerMovement : Player {
     {
         if(Input.GetKey(KeyCode.LeftShift) && stamina >= 10)
         {
-            speed = sprintSpeed;
+            speed = speed * sprintSpeedMultip;
             DecreaseStamina();
         }
         else if(stamina < maxStamina)

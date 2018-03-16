@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerAttacking : Player {
 
@@ -11,7 +12,12 @@ public class PlayerAttacking : Player {
     void FixedUpdate()
     {
         coolDown -= Time.deltaTime;
-        if (Input.GetMouseButton(0))
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit info;
+        Physics.Raycast(ray, out info);
+
+        if (Input.GetMouseButton(0) && !info.collider.GetComponent<Joystick>())
         {
             switch (WeaponHandling.GetEquippedWeapon())
             {
