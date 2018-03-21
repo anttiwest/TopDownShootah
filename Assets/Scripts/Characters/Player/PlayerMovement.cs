@@ -36,10 +36,26 @@ public class PlayerMovement : Player {
 
     private void FixedUpdate()
     {
+        bool jumpPressed = false;
 #if UNITY_ANDROID
         float h = CrossPlatformInputManager.GetAxis("HorizontalLeft");
         float v = CrossPlatformInputManager.GetAxis("VerticalLeft");
-        bool jumpPressed = false;
+        
+        for (int i = 0; i < Input.touchCount; i++)
+        {
+            if (Input.GetTouch(i).phase == TouchPhase.Began)
+            {
+                if (Input.GetTouch(i).tapCount == 2)
+                {
+                    jumpPressed = true;
+                }
+            }
+        }
+
+        if (jumpPressed && isGrounded && stamina >= 50)
+        {
+            Jump(h, v);
+        }
         TurnMobile();
 #elif UNITY_IPHONE
         float h = CrossPlatformInputManager.GetAxis("Horizontal");
@@ -51,15 +67,12 @@ public class PlayerMovement : Player {
         float v = Input.GetAxisRaw("Vertical");
         bool jumpPressed = Input.GetKeyDown("space");
         Turn();
-#endif
-        Move(h, v);
-        
         if (jumpPressed && isGrounded && stamina >= 50)
         {
             Jump(h, v);
-            stamina -= 50f;
         }
-
+#endif
+        Move(h, v);
         transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
 
         if (!isGrounded)
@@ -73,6 +86,7 @@ public class PlayerMovement : Player {
     {
         jumpMovement.Set(h, jumpForce, v);
         playerRigidbody.velocity += jumpMovement;
+        stamina -= 50f;
     }
 
     void Move(float h, float v)
