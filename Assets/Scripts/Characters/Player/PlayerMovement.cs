@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerMovement : Player {
@@ -10,6 +11,8 @@ public class PlayerMovement : Player {
     bool isGrounded;
     Rigidbody playerRigidbody;
     float sprintSpeedMultip;
+    Quaternion currentRotation;
+
 
     //stamina
     internal float stamina;
@@ -37,18 +40,20 @@ public class PlayerMovement : Player {
         float h = CrossPlatformInputManager.GetAxis("HorizontalLeft");
         float v = CrossPlatformInputManager.GetAxis("VerticalLeft");
         bool jumpPressed = false;
+        TurnMobile();
 #elif UNITY_IPHONE
         float h = CrossPlatformInputManager.GetAxis("Horizontal");
         float v = CrossPlatformInputManager.GetAxis("Vertical");
         bool jumpPressed = false;
+        TurnMobile();
 #else
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
         bool jumpPressed = Input.GetKeyDown("space");
+        Turn();
 #endif
         Move(h, v);
-        Turn();
-
+        
         if (jumpPressed && isGrounded && stamina >= 50)
         {
             Jump(h, v);
@@ -105,6 +110,22 @@ public class PlayerMovement : Player {
             Vector3 positionToLookAt = info.point;
             positionToLookAt.y = 0f;
             transform.LookAt(positionToLookAt);
+        }
+    }
+
+    void TurnMobile()
+    {
+        float h = CrossPlatformInputManager.GetAxis("HorizontalRight");
+        float v = CrossPlatformInputManager.GetAxis("VerticalRight");
+
+        if (h >= 0.5 || h <= -0.5 || v >= 0.5 || v <= -0.5)
+        {
+            transform.rotation = Quaternion.LookRotation(new Vector3(h, 0f, v));
+            currentRotation = transform.rotation;
+        }
+        else
+        {
+            transform.rotation = currentRotation;
         }
     }
 

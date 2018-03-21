@@ -177,6 +177,7 @@
     <Compile Include="Assets\Scripts\Characters\Player\WeaponHandling.cs" />
     <Compile Include="Assets\Scripts\Combat\Shooting\Bullet.cs" />
     <Compile Include="Assets\Scripts\Combat\Shooting\BulletSpawnPoint.cs" />
+    <Compile Include="Assets\Scripts\Control\ControllingCameraAspectScript.cs" />
     <Compile Include="Assets\Scripts\Control\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\Control\GameController.cs" />
     <Compile Include="Assets\Scripts\Control\Menu.cs" />

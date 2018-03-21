@@ -32,8 +32,7 @@ public class GameController : MonoBehaviour {
         if(googleAds != null)
         {
             googleAds.PlayRewardedVideo();
-        }
-        
+        }        
         SceneManager.LoadScene("Menu");
     }
 }
