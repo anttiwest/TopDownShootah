@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerMovement : Player {
-
 
     float jumpForce;
     Vector3 jumpMovement;
@@ -13,14 +13,16 @@ public class PlayerMovement : Player {
     float sprintSpeedMultip;
     Quaternion currentRotation;
 
-
-    //stamina
+    bool isMoving;
+    bool isAbleToSprint;
+    bool isSprinting;
+    Button sprintButton;
+    float sprintSpeed;
+    float normalSpeed;
+    
     internal float stamina;
     internal float maxStamina = 100f;
-    float staminaRegenTimer = 0.0f;
-    const float staminaDecreasePerFrame = 30.0f;
-    const float staminaIncreasePerFrame = 20.0f;
-    const float staminaTimeToRegen = 3.0f;
+    StaminaHandler staminaHandler;
 
     Joystick leftJoystick;
 
@@ -28,15 +30,27 @@ public class PlayerMovement : Player {
     {
         speed = 10f;
         sprintSpeedMultip = 1.5f;
+        sprintSpeed = speed * sprintSpeedMultip;
+        normalSpeed = speed;
+
         jumpForce = 25f;
         playerRigidbody = GetComponent<Rigidbody>();
-        stamina = 100f;
+
         leftJoystick = GameObject.Find("LeftJoyStick").GetComponent<Joystick>();
+        sprintButton = GameObject.Find("SprintButton").GetComponent<Button>();
+        sprintButton.onClick.AddListener(ToggleSprinting);
+
+        stamina = maxStamina;
+        staminaHandler = new StaminaHandler();
+
+        isAbleToSprint = true;
+        isSprinting = false;
     }
 
     private void FixedUpdate()
     {
         bool jumpPressed = false;
+        
 #if UNITY_ANDROID
         float h = CrossPlatformInputManager.GetAxis("HorizontalLeft");
         float v = CrossPlatformInputManager.GetAxis("VerticalLeft");
@@ -56,12 +70,30 @@ public class PlayerMovement : Player {
         {
             Jump(h, v);
         }
+
         TurnMobile();
+
 #elif UNITY_IPHONE
-        float h = CrossPlatformInputManager.GetAxis("Horizontal");
-        float v = CrossPlatformInputManager.GetAxis("Vertical");
-        bool jumpPressed = false;
+        float h = CrossPlatformInputManager.GetAxis("HorizontalLeft");
+        float v = CrossPlatformInputManager.GetAxis("VerticalLeft");
+        
+        for (int i = 0; i < Input.touchCount; i++)
+        {
+            if (Input.GetTouch(i).phase == TouchPhase.Began)
+            {
+                if (Input.GetTouch(i).tapCount == 2)
+                {
+                    jumpPressed = true;
+                }
+            }
+        }
+
+        if (jumpPressed && isGrounded && stamina >= 50)
+        {
+            Jump(h, v);
+        }
         TurnMobile();
+
 #else
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
@@ -71,7 +103,27 @@ public class PlayerMovement : Player {
         {
             Jump(h, v);
         }
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            ableToSprint = true;
+        }
+        else
+        {
+            ableToSprint = false;
+        }
+        
 #endif
+
+        if(stamina <= 10)
+        {
+            isAbleToSprint = false;
+            ToggleSprinting();
+        }
+        else
+        {
+            isAbleToSprint = true;
+        }
+
         Move(h, v);
         transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
 
@@ -91,27 +143,42 @@ public class PlayerMovement : Player {
 
     void Move(float h, float v)
     {
-        if(Input.GetKey(KeyCode.LeftShift) && stamina >= 10)
+        if (h == 0 && v == 0)
         {
-            speed = speed * sprintSpeedMultip;
-            DecreaseStamina();
-        }
-        else if(stamina < maxStamina)
-        {
-            speed = 10f;
-            if (staminaRegenTimer <= staminaTimeToRegen)
-            {
-                IncreaseStamina();
-            }
+            isSprinting = false;
+            isMoving = false;
         }
         else
         {
-            staminaRegenTimer += Time.deltaTime;
-            speed = 10f;
+            isMoving = true;
         }
+
+        if (isSprinting)
+        {
+            speed = sprintSpeed;
+            stamina = staminaHandler.Drain(stamina, maxStamina);
+        }
+        else
+        {   
+            speed = normalSpeed;
+            stamina = staminaHandler.Regen(stamina, maxStamina);
+        }
+
         movementDirection.Set(h, 0, v);
         movementDirection = speed * Time.deltaTime * movementDirection.normalized;
         transform.position += movementDirection;
+    }
+
+    void ToggleSprinting()
+    {
+        if(isAbleToSprint && !isSprinting && isMoving)
+        {
+            isSprinting = true;
+        }
+        else
+        {
+            isSprinting = false;
+        }
     }
 
     void Turn()
@@ -157,16 +224,5 @@ public class PlayerMovement : Player {
         {
             isGrounded = false;
         }
-    }
-
-    public void DecreaseStamina()
-    {
-        stamina = Mathf.Clamp(stamina - (staminaDecreasePerFrame * Time.deltaTime), 0.0f, maxStamina);
-        staminaRegenTimer = 0.0f;
-    }
-
-    public void IncreaseStamina()
-    {
-        stamina = Mathf.Clamp(stamina + (staminaIncreasePerFrame * Time.deltaTime), 0.0f, maxStamina);
     }
 }

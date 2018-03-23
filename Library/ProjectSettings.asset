@@ -58,7 +58,7 @@ PlayerSettings:
   displayResolutionDialog: 1
   iosAllowHTTPDownload: 1
   allowedAutorotateToPortrait: 1
-  allowedAutorotateToPortraitUpsideDown: 1
+  allowedAutorotateToPortraitUpsideDown: 0
   allowedAutorotateToLandscapeRight: 1
   allowedAutorotateToLandscapeLeft: 1
   useOSAutorotation: 1
@@ -138,7 +138,7 @@ PlayerSettings:
       depthFormat: 1
   protectGraphicsMemory: 0
   useHDRDisplay: 0
-  targetPixelDensity: 0
+  targetPixelDensity: 200
   resolutionScalingMode: 0
   applicationIdentifier:
     Android: com.AnttiWest.TopDownShootah
