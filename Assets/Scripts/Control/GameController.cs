@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour {
         Cursor.visible = true;
 
     #if UNITY_ANDROID
-            googleAds = GameObject.Find("AdSystem").GetComponent<GoogleMobileAdverts>();
+            //googleAds = GameObject.Find("AdSystem").GetComponent<GoogleMobileAdverts>();
     #elif UNITY_IPHONE
             googleAds = GameObject.Find("AdSystem").GetComponent<GoogleMobileAdverts>();
     #endif

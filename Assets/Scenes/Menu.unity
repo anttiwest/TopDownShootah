@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 362024906}
   m_Layer: 0
   m_Name: AdSystem
-  m_TagString: Untagged
+  m_TagString: AdSystem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

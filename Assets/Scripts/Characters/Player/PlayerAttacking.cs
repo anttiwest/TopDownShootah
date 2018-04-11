@@ -17,7 +17,6 @@ public class PlayerAttacking : Player {
         Touch[] touches = Input.touches;
         if (touches.Length >= 2)
         {
-            Debug.Log("touches: " + touches.Length);
             switch (WeaponHandling.GetEquippedWeapon())
             {
                 case Equipped.Ranged:

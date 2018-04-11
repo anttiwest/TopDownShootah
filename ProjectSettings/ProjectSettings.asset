@@ -138,8 +138,8 @@ PlayerSettings:
       depthFormat: 1
   protectGraphicsMemory: 0
   useHDRDisplay: 0
-  targetPixelDensity: 200
-  resolutionScalingMode: 0
+  targetPixelDensity: 401
+  resolutionScalingMode: 1
   applicationIdentifier:
     Android: com.AnttiWest.TopDownShootah
   buildNumber: {}
@@ -592,6 +592,10 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Build: 0
+    Collab: 0
+    ErrorHub: 0
+    Hub: 0
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2

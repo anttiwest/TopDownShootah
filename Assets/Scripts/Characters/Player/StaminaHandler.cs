@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class StaminaHandler : MonoBehaviour {
-
-    //stamina
-    //internal float stamina;
-    //internal float maxStamina = 100f;
+    
     float staminaRegenTimer = 0.0f;
     const float staminaDecreasePerFrame = 30.0f;
     const float staminaIncreasePerFrame = 20.0f;
