@@ -3,7 +3,7 @@
 public class StaminaHandler : MonoBehaviour {
     
     float staminaRegenTimer = 0.0f;
-    const float staminaDecreasePerFrame = 30.0f;
+    const float staminaDecreasePerFrame = 50.0f;
     const float staminaIncreasePerFrame = 20.0f;
     const float staminaTimeToRegen = 3.0f;
 

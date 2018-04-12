@@ -7,8 +7,8 @@ public class PlayerAttacking : Player {
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
     float coolDown = 0;
-    float fireRate = 0.3f;
-    float shotSpeed = 30f;
+    float fireRate = 0.2f;
+    float shotSpeed = 50f;
 
     void FixedUpdate()
     {

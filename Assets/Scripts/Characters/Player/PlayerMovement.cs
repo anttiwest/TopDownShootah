@@ -25,6 +25,8 @@ public class PlayerMovement : Player {
     internal float maxStamina = 100f;
     StaminaHandler staminaHandler;
 
+    Animator animator;
+
     bool jumpPressed;
     
     float tapCooldown = 0;
@@ -32,7 +34,7 @@ public class PlayerMovement : Player {
 
     private void Awake()
     {
-        speed = 10f;
+        speed = 5f;
         sprintSpeedMultip = 1.5f;
         sprintSpeed = speed * sprintSpeedMultip;
         normalSpeed = speed;
@@ -48,6 +50,8 @@ public class PlayerMovement : Player {
 
         isAbleToSprint = true;
         isSprinting = false;
+
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void FixedUpdate()
@@ -60,14 +64,23 @@ public class PlayerMovement : Player {
 
         if (Input.touches.Length > 0)
         {
-            if (Input.touches[0].phase == TouchPhase.Ended)
-            {
-                if (TapActive()) jumpPressed = true;
-                else tapCooldown = tapRate;
-            }   
-        }
+            bool touchEnded = false;
 
-        //Debug.Log("tapActive: " + TapActive());
+            for(int i = 0; i < Input.touches.Length; i++)
+            {
+                if (Input.touches[i].phase == TouchPhase.Ended)
+                {
+                    touchEnded = true;
+                }
+                Debug.Log("touchEnded: " + touchEnded);
+            }
+
+            if (touchEnded)
+            {
+                if (tapCooldown > 0) jumpPressed = true;
+                else tapCooldown = tapRate;
+            }
+        }
 
         if (jumpPressed && isGrounded && stamina >= 50)
         {
@@ -76,10 +89,11 @@ public class PlayerMovement : Player {
 
         TurnMobile();
 
-        if (stamina <= 0)
+        if (stamina <= 10)
         {
             isAbleToSprint = false;
             ToggleSprinting();
+            isSprinting = false;
         }
         else
         {
@@ -99,6 +113,8 @@ public class PlayerMovement : Player {
         {
             stamina = staminaHandler.Regen(stamina, maxStamina);
         }
+
+        animator.SetBool("isMoving", isMoving);
     }
     
     private bool TapActive()

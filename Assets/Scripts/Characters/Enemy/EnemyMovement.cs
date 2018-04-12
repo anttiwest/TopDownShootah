@@ -10,7 +10,7 @@ public class EnemyMovement : Enemy {
     private void Awake()
     {
         nearPlayer = false;
-        speed = 6f;
+        speed = 4f;
         meshNavigator = GetComponent<NavMeshAgent>();
     }
 
