@@ -25,8 +25,6 @@ public class PlayerMovement : Player {
     internal float maxStamina = 100f;
     StaminaHandler staminaHandler;
 
-    Joystick leftJoystick;
-
     bool jumpPressed;
     
     float tapCooldown = 0;
@@ -41,8 +39,7 @@ public class PlayerMovement : Player {
 
         jumpForce = 25f;
         playerRigidbody = GetComponent<Rigidbody>();
-
-        leftJoystick = GameObject.Find("LeftJoyStick").GetComponent<Joystick>();
+        
         sprintButton = GameObject.Find("SprintButton").GetComponent<Button>();
         sprintButton.onClick.AddListener(ToggleSprinting);
 
@@ -55,7 +52,6 @@ public class PlayerMovement : Player {
 
     private void FixedUpdate()
     {
-
         jumpPressed = false;
         float h = CrossPlatformInputManager.GetAxis("HorizontalLeft");
         float v = CrossPlatformInputManager.GetAxis("VerticalLeft");
@@ -64,12 +60,14 @@ public class PlayerMovement : Player {
 
         if (Input.touches.Length > 0)
         {
-            if (Input.touches[0].phase == TouchPhase.Began)
+            if (Input.touches[0].phase == TouchPhase.Ended)
             {
-                if (tapCooldown > 0) jumpPressed = true;
+                if (TapActive()) jumpPressed = true;
                 else tapCooldown = tapRate;
-            }
+            }   
         }
+
+        //Debug.Log("tapActive: " + TapActive());
 
         if (jumpPressed && isGrounded && stamina >= 50)
         {
@@ -101,6 +99,11 @@ public class PlayerMovement : Player {
         {
             stamina = staminaHandler.Regen(stamina, maxStamina);
         }
+    }
+    
+    private bool TapActive()
+    {
+        return tapCooldown > 0;
     }
 
     void Jump(float h, float v)
