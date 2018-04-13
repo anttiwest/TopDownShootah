@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Downloaded\_MK\MKGlassFree\MKGlassFreeMaterialHelper.cs" />
+    <Compile Include="Assets\Downloaded\BrokenVector\LowPolySurvivalEssentials\Example\Scripts\AnimatedFire.cs" />
     <Compile Include="Assets\Downloaded\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
     <Compile Include="Assets\Downloaded\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
     <Compile Include="Assets\Downloaded\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
@@ -189,6 +190,8 @@
     <Compile Include="Assets\Scripts\Effects\DamageParticle.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Downloaded\BrokenVector\LowPolyShaders\Shaders\LowPolyPBRShader.shader" />
+    <None Include="Assets\Downloaded\BrokenVector\LowPolyShaders\Shaders\LowPolyUnlitShader.shader" />
     <None Include="Assets\Downloaded\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Downloaded\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
     <None Include="Assets\Downloaded\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
