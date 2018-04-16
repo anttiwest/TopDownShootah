@@ -62,23 +62,34 @@ public class PlayerMovement : Player {
 
         tapCooldown -= Time.deltaTime;
 
-        if (Input.touches.Length > 0)
+        //if (Input.touches.Length > 0)
+        //{
+        //    bool touchEnded = false;
+
+        //    for(int i = 0; i < Input.touches.Length; i++)
+        //    {
+        //        if (Input.touches[i].phase == TouchPhase.Ended)
+        //        {
+        //            touchEnded = true;
+        //        }
+        //        Debug.Log("touchEnded: " + touchEnded);
+        //    }
+
+        //    if (touchEnded)
+        //    {
+        //        if (tapCooldown > 0) jumpPressed = true;
+        //        else tapCooldown = tapRate;
+        //    }
+        //}
+
+        for (int i = 0; i < Input.touchCount; i++)
         {
-            bool touchEnded = false;
-
-            for(int i = 0; i < Input.touches.Length; i++)
+            if (Input.GetTouch(i).phase == TouchPhase.Began)
             {
-                if (Input.touches[i].phase == TouchPhase.Ended)
+                if (Input.GetTouch(i).tapCount == 2)
                 {
-                    touchEnded = true;
+                    jumpPressed = true;
                 }
-                Debug.Log("touchEnded: " + touchEnded);
-            }
-
-            if (touchEnded)
-            {
-                if (tapCooldown > 0) jumpPressed = true;
-                else tapCooldown = tapRate;
             }
         }
 

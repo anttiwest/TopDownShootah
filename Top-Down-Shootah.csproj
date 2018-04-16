@@ -183,9 +183,11 @@
     <Compile Include="Assets\Scripts\Control\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\Control\GameController.cs" />
     <Compile Include="Assets\Scripts\Control\Menu.cs" />
+    <Compile Include="Assets\Scripts\Control\Misc\InvisbleCollider.cs" />
     <Compile Include="Assets\Scripts\Control\OutOfBounds.cs" />
     <Compile Include="Assets\Scripts\Control\UI\Crosshair.cs" />
     <Compile Include="Assets\Scripts\Control\UI\Health.cs" />
+    <Compile Include="Assets\Scripts\Control\UI\ScoreCounter.cs" />
     <Compile Include="Assets\Scripts\Control\UI\Stamina.cs" />
     <Compile Include="Assets\Scripts\Effects\DamageParticle.cs" />
   </ItemGroup>

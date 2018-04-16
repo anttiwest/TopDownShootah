@@ -41,15 +41,17 @@ public class GoogleMobileAdverts : MonoBehaviour {
             PlayRewardedVideo();
         }
 
-        if (SceneManager.GetActiveScene().name.Equals("Menu"))
-        {
+        //if (SceneManager.GetActiveScene().name.Equals("Menu"))
+        //{
 
-            bannerView.Show();
-        }
-        else
-        {
-            bannerView.Hide();
-        }
+        //    bannerView.Show();
+        //}
+        //else
+        //{
+        //    bannerView.Hide();
+        //}
+
+        bannerView.Hide();
     }
 
     private void RequestBanner()
