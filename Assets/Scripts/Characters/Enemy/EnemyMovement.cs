@@ -31,7 +31,7 @@ public class EnemyMovement : Enemy {
             }
         }
 
-        if (distanceToPlayer <= 10)
+        if (distanceToPlayer <= 15)
         {
             playerNoticed = true;
             MoveToPlayer();
