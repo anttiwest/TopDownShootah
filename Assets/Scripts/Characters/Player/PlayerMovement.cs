@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 
@@ -32,6 +30,10 @@ public class PlayerMovement : Player {
     float tapCooldown = 0;
     float tapRate = 0.3f;
 
+    Text jumpDebug;
+    float distToGround;
+    Collider collider;
+    
     private void Awake()
     {
         speed = 5f;
@@ -52,6 +54,10 @@ public class PlayerMovement : Player {
         isSprinting = false;
 
         animator = GetComponentInChildren<Animator>();
+
+        jumpDebug = GameObject.Find("jumpDebug").GetComponent<Text>();
+        jumpDebug.text = "jump not pressed";
+        collider = GetComponent<BoxCollider>();
     }
 
     private void FixedUpdate()
@@ -59,7 +65,6 @@ public class PlayerMovement : Player {
         jumpPressed = false;
         float h = CrossPlatformInputManager.GetAxis("HorizontalLeft");
         float v = CrossPlatformInputManager.GetAxis("VerticalLeft");
-
         tapCooldown -= Time.deltaTime;
 
         //if (Input.touches.Length > 0)
@@ -89,13 +94,18 @@ public class PlayerMovement : Player {
                 if (Input.GetTouch(i).tapCount == 2)
                 {
                     jumpPressed = true;
+                    
                 }
             }
         }
 
-        if (jumpPressed && isGrounded && stamina >= 50)
+        distToGround = collider.bounds.extents.y;
+        if (jumpPressed && IsGrounded() && (stamina >= 50))
         {
-            Jump(h, v);
+            jumpDebug.text = jumpDebug.text + ", jumppressed: "+ jumpPressed;
+            jumpMovement.Set(h, jumpForce, v);
+            playerRigidbody.velocity += jumpMovement;
+            stamina -= 50f;
         }
 
         TurnMobile();
@@ -126,11 +136,6 @@ public class PlayerMovement : Player {
         }
 
         animator.SetBool("isMoving", isMoving);
-    }
-    
-    private bool TapActive()
-    {
-        return tapCooldown > 0;
     }
 
     void Jump(float h, float v)
@@ -207,20 +212,26 @@ public class PlayerMovement : Player {
             transform.rotation = currentRotation;
         }
     }
-
-    private void OnCollisionStay(Collision collision)
+    
+    bool IsGrounded()
     {
-        if (collision.gameObject.isStatic)
-        {
-            isGrounded = true;
-        }
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
     }
+ }
 
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.isStatic)
-        {
-            isGrounded = false;
-        }
-    }
-}
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.gameObject.isStatic)
+    //    {
+    //        isGrounded = true;
+    //    }
+    //}
+
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.gameObject.isStatic)
+    //    {
+    //        isGrounded = false;
+    //    }
+    //}
+
