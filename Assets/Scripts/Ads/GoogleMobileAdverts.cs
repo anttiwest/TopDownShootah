@@ -2,12 +2,12 @@
 using GoogleMobileAds.Api;
 using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GoogleMobileAdverts : MonoBehaviour {
 
     BannerView bannerView;
     private RewardBasedVideoAd rewardBasedVideo;
-
     Button playRewardVideoButton;
 
     public void Start()
@@ -32,6 +32,26 @@ public class GoogleMobileAdverts : MonoBehaviour {
 
         playRewardVideoButton = GameObject.Find("PlayRewardVideoButton").GetComponent<Button>();
         playRewardVideoButton.onClick.AddListener(PlayRewardedVideo);
+    }
+
+    private void Update()
+    {
+        if (!GameObject.Find("Player"))
+        {
+            PlayRewardedVideo();
+        }
+
+        //if (SceneManager.GetActiveScene().name.Equals("Menu"))
+        //{
+
+        //    bannerView.Show();
+        //}
+        //else
+        //{
+        //    bannerView.Hide();
+        //}
+
+        bannerView.Hide();
     }
 
     private void RequestBanner()

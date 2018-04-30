@@ -1,84 +1,191 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerMovement : Player {
-
 
     float jumpForce;
     Vector3 jumpMovement;
     Vector3 movementDirection;
     bool isGrounded;
     Rigidbody playerRigidbody;
-    float sprintSpeed;
+    float sprintSpeedMultip;
+    Quaternion currentRotation;
 
-    //stamina
+    bool isMoving;
+    bool isAbleToSprint;
+    bool isSprinting;
+    Button sprintButton;
+    float sprintSpeed;
+    float normalSpeed;
+    
     internal float stamina;
     internal float maxStamina = 100f;
-    float staminaRegenTimer = 0.0f;
-    const float staminaDecreasePerFrame = 30.0f;
-    const float staminaIncreasePerFrame = 20.0f;
-    const float staminaTimeToRegen = 3.0f;
+    StaminaHandler staminaHandler;
 
+    Animator animator;
 
+    bool jumpPressed;
+    
+    float tapCooldown = 0;
+    float tapRate = 0.3f;
+
+    Text jumpDebug;
+    float distToGround;
+    Collider collider;
+
+    int jc;
+    
     private void Awake()
     {
-        speed = 10f;
-        sprintSpeed = 15f;
+        speed = 5f;
+        sprintSpeedMultip = 1.5f;
+        sprintSpeed = speed * sprintSpeedMultip;
+        normalSpeed = speed;
+
         jumpForce = 25f;
         playerRigidbody = GetComponent<Rigidbody>();
-        stamina = 100f;
+        
+        sprintButton = GameObject.Find("SprintButton").GetComponent<Button>();
+        sprintButton.onClick.AddListener(ToggleSprinting);
+
+        stamina = maxStamina;
+        staminaHandler = FindObjectOfType<StaminaHandler>();
+
+        isAbleToSprint = true;
+        isSprinting = false;
+
+        animator = GetComponentInChildren<Animator>();
+
+        jumpDebug = GameObject.Find("jumpDebug").GetComponent<Text>();
+        jumpDebug.text = "";
+        collider = GetComponent<BoxCollider>();
+        jc = 0;
     }
 
     private void FixedUpdate()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        Move(h, v);
-        Turn();
-        
-        transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
+        jumpPressed = false;
+        float h = CrossPlatformInputManager.GetAxis("HorizontalLeft");
+        float v = CrossPlatformInputManager.GetAxis("VerticalLeft");
+        tapCooldown -= Time.deltaTime;
 
-        if (Input.GetKeyDown("space") && isGrounded && stamina >= 50)
+        //if (Input.touches.Length > 0)
+        //{
+        //    bool touchEnded = false;
+
+        //    for(int i = 0; i < Input.touches.Length; i++)
+        //    {
+        //        if (Input.touches[i].phase == TouchPhase.Ended)
+        //        {
+        //            touchEnded = true;
+        //        }
+        //        Debug.Log("touchEnded: " + touchEnded);
+        //    }
+
+        //    if (touchEnded)
+        //    {
+        //        if (tapCooldown > 0) jumpPressed = true;
+        //        else tapCooldown = tapRate;
+        //    }
+        //}
+
+        for (int i = 0; i < Input.touchCount; i++)
         {
-            Jump(h, v);
-            stamina -= 50f;
+            if (Input.GetTouch(i).phase == TouchPhase.Began)
+            {
+                if (Input.GetTouch(i).tapCount == 2)
+                {
+                    jumpPressed = true;
+                    
+                }
+            }
         }
+
+        distToGround = collider.bounds.extents.y;
+        if (jumpPressed && IsGrounded() && (stamina >= 51))
+        {
+            jc++;
+            jumpDebug.text = "jumppressed: "+ jumpPressed  + ", " + jc;
+            jumpMovement.Set(h, jumpForce, v);
+            playerRigidbody.velocity += jumpMovement;
+            stamina -= 51f;
+        }
+
+        TurnMobile();
+
+        if (stamina <= 10)
+        {
+            isAbleToSprint = false;
+            ToggleSprinting();
+            isSprinting = false;
+        }
+        else
+        {
+            isAbleToSprint = true;
+        }
+
+        Move(h, v);
+        transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
 
         if (!isGrounded)
         {
             playerRigidbody.AddForce(new Vector3(0, -50, 0));
             transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
         }
+
+        if (stamina < maxStamina)
+        {
+            stamina = staminaHandler.Regen(stamina, maxStamina);
+        }
+
+        animator.SetBool("isMoving", isMoving);
     }
 
     void Jump(float h, float v)
     {
         jumpMovement.Set(h, jumpForce, v);
         playerRigidbody.velocity += jumpMovement;
+        stamina -= 50f;
     }
 
     void Move(float h, float v)
     {
-        if(Input.GetKey(KeyCode.LeftShift) && stamina >= 10)
+        if (h == 0 && v == 0)
         {
-            speed = sprintSpeed;
-            DecreaseStamina();
-        }
-        else if(stamina < maxStamina)
-        {
-            speed = 10f;
-            if (staminaRegenTimer <= staminaTimeToRegen)
-            {
-                IncreaseStamina();
-            }
+            isSprinting = false;
+            isMoving = false;
         }
         else
         {
-            staminaRegenTimer += Time.deltaTime;
-            speed = 10f;
+            isMoving = true;
         }
+
+        if (isSprinting)
+        {
+            speed = sprintSpeed;
+            stamina = staminaHandler.Drain(stamina, maxStamina);
+        }
+        else
+        {   
+            speed = normalSpeed;
+        }
+
         movementDirection.Set(h, 0, v);
         movementDirection = speed * Time.deltaTime * movementDirection.normalized;
         transform.position += movementDirection;
+    }
+
+    void ToggleSprinting()
+    {
+        if(isAbleToSprint && !isSprinting && isMoving)
+        {
+            isSprinting = true;
+        }
+        else
+        {
+            isSprinting = false;
+        }
     }
 
     void Turn()
@@ -94,30 +201,41 @@ public class PlayerMovement : Player {
         }
     }
 
-    private void OnCollisionStay(Collision collision)
+    void TurnMobile()
     {
-        if (collision.gameObject.isStatic)
+        float h = CrossPlatformInputManager.GetAxis("HorizontalRight");
+        float v = CrossPlatformInputManager.GetAxis("VerticalRight");
+
+        if (h >= 0.5 || h <= -0.5 || v >= 0.5 || v <= -0.5)
         {
-            isGrounded = true;
+            transform.rotation = Quaternion.LookRotation(new Vector3(h, 0f, v));
+            currentRotation = transform.rotation;
+        }
+        else
+        {
+            transform.rotation = currentRotation;
         }
     }
-
-    private void OnCollisionExit(Collision collision)
+    
+    bool IsGrounded()
     {
-        if (collision.gameObject.isStatic)
-        {
-            isGrounded = false;
-        }
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
     }
+ }
 
-    public void DecreaseStamina()
-    {
-        stamina = Mathf.Clamp(stamina - (staminaDecreasePerFrame * Time.deltaTime), 0.0f, maxStamina);
-        staminaRegenTimer = 0.0f;
-    }
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.gameObject.isStatic)
+    //    {
+    //        isGrounded = true;
+    //    }
+    //}
 
-    public void IncreaseStamina()
-    {
-        stamina = Mathf.Clamp(stamina + (staminaIncreasePerFrame * Time.deltaTime), 0.0f, maxStamina);
-    }
-}
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.gameObject.isStatic)
+    //    {
+    //        isGrounded = false;
+    //    }
+    //}
+

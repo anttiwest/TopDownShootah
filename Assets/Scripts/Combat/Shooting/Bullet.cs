@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour {
 
     private void Awake()
     {
+        transform.rotation.Set(0,0,0,0);
         damage = 20;
     }
 
@@ -15,8 +16,15 @@ public class Bullet : MonoBehaviour {
         {
             Enemy enemy = other.GetComponent<Enemy>();
             enemy.TakeDamage(damage);
+        }
+        Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!collision.collider.GetComponent<Player>())
+        {
             Destroy(gameObject);
         }
     }
-
 }

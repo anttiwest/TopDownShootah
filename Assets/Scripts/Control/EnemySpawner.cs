@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class EnemySpawner : GameController {
 
     public GameObject enemyPrefab;
+
+    ScoreCounter scoreCounter;
     int enemiesAlive;
     int score;
     Canvas ui;
@@ -12,9 +14,10 @@ public class EnemySpawner : GameController {
     private void Awake()
     {
         ui = GameObject.FindWithTag("UI").GetComponentInChildren<Canvas>();
-        score = 0;
-        scoreBoard = ui.GetComponentInChildren<Text>();
-        scoreBoard.text = score.ToString();
+        //score = 0;
+        //scoreBoard = ui.GetComponentInChildren<Text>();
+        //scoreBoard.text = score.ToString();
+        scoreCounter = new ScoreCounter();
     }
 
     public void SpawnEnemy()
@@ -51,7 +54,8 @@ public class EnemySpawner : GameController {
     public void EnemyDied()
     {
         enemiesAlive--;
-        score += 10;
-        scoreBoard.text = score.ToString();
+        scoreCounter.UpdateScore(10);
+        //score += 10;
+        //scoreBoard.text = score.ToString();
     }
 }

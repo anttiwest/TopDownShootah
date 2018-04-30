@@ -10,7 +10,13 @@ public class GameController : MonoBehaviour {
     {
         player = GameObject.FindWithTag("Player");
         Cursor.visible = true;
-        googleAds = GameObject.Find("AdSystem").GetComponent<GoogleMobileAdverts>();
+
+    #if UNITY_ANDROID
+            //googleAds = GameObject.Find("AdSystem").GetComponent<GoogleMobileAdverts>();
+    #elif UNITY_IPHONE
+            googleAds = GameObject.Find("AdSystem").GetComponent<GoogleMobileAdverts>();
+    #endif
+
     }
 
     void FixedUpdate()
@@ -23,9 +29,10 @@ public class GameController : MonoBehaviour {
 
     public void LoadMenu()
     {
-        googleAds.PlayRewardedVideo();
-
-        //string scene = SceneManager.GetActiveScene().name;
+        if(googleAds != null)
+        {
+            googleAds.PlayRewardedVideo();
+        }        
         SceneManager.LoadScene("Menu");
     }
 }
