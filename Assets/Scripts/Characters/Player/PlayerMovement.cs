@@ -33,6 +33,8 @@ public class PlayerMovement : Player {
     Text jumpDebug;
     float distToGround;
     Collider collider;
+
+    int jc;
     
     private void Awake()
     {
@@ -56,8 +58,9 @@ public class PlayerMovement : Player {
         animator = GetComponentInChildren<Animator>();
 
         jumpDebug = GameObject.Find("jumpDebug").GetComponent<Text>();
-        jumpDebug.text = "jump not pressed";
+        jumpDebug.text = "";
         collider = GetComponent<BoxCollider>();
+        jc = 0;
     }
 
     private void FixedUpdate()
@@ -100,12 +103,13 @@ public class PlayerMovement : Player {
         }
 
         distToGround = collider.bounds.extents.y;
-        if (jumpPressed && IsGrounded() && (stamina >= 50))
+        if (jumpPressed && IsGrounded() && (stamina >= 51))
         {
-            jumpDebug.text = jumpDebug.text + ", jumppressed: "+ jumpPressed;
+            jc++;
+            jumpDebug.text = "jumppressed: "+ jumpPressed  + ", " + jc;
             jumpMovement.Set(h, jumpForce, v);
             playerRigidbody.velocity += jumpMovement;
-            stamina -= 50f;
+            stamina -= 51f;
         }
 
         TurnMobile();
