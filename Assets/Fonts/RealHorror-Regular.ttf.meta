@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: caef2d72f578e6d429ebfdda1b851ddf
+timeCreated: 1525338413
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Real Horror
+  fontNames:
+  - Real Horror
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 322b0cacf47255747bbd10a2dfb34920, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
