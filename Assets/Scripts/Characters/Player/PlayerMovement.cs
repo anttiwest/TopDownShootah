@@ -29,12 +29,9 @@ public class PlayerMovement : Player {
     
     float tapCooldown = 0;
     float tapRate = 0.3f;
-
-    Text jumpDebug;
+    
     float distToGround;
     Collider collider;
-
-    int jc;
     
     private void Awake()
     {
@@ -56,11 +53,7 @@ public class PlayerMovement : Player {
         isSprinting = false;
 
         animator = GetComponentInChildren<Animator>();
-
-        jumpDebug = GameObject.Find("jumpDebug").GetComponent<Text>();
-        jumpDebug.text = "";
         collider = GetComponent<BoxCollider>();
-        jc = 0;
     }
 
     private void FixedUpdate()
@@ -69,26 +62,6 @@ public class PlayerMovement : Player {
         float h = CrossPlatformInputManager.GetAxis("HorizontalLeft");
         float v = CrossPlatformInputManager.GetAxis("VerticalLeft");
         tapCooldown -= Time.deltaTime;
-
-        //if (Input.touches.Length > 0)
-        //{
-        //    bool touchEnded = false;
-
-        //    for(int i = 0; i < Input.touches.Length; i++)
-        //    {
-        //        if (Input.touches[i].phase == TouchPhase.Ended)
-        //        {
-        //            touchEnded = true;
-        //        }
-        //        Debug.Log("touchEnded: " + touchEnded);
-        //    }
-
-        //    if (touchEnded)
-        //    {
-        //        if (tapCooldown > 0) jumpPressed = true;
-        //        else tapCooldown = tapRate;
-        //    }
-        //}
 
         for (int i = 0; i < Input.touchCount; i++)
         {
@@ -105,8 +78,6 @@ public class PlayerMovement : Player {
         distToGround = collider.bounds.extents.y;
         if (jumpPressed && IsGrounded() && (stamina >= 51))
         {
-            jc++;
-            jumpDebug.text = "jumppressed: "+ jumpPressed  + ", " + jc;
             jumpMovement.Set(h, jumpForce, v);
             playerRigidbody.velocity += jumpMovement;
             stamina -= 51f;
@@ -222,20 +193,4 @@ public class PlayerMovement : Player {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
     }
  }
-
-    //private void OnCollisionStay(Collision collision)
-    //{
-    //    if (collision.gameObject.isStatic)
-    //    {
-    //        isGrounded = true;
-    //    }
-    //}
-
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    if (collision.gameObject.isStatic)
-    //    {
-    //        isGrounded = false;
-    //    }
-    //}
 

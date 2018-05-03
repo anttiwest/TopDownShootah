@@ -187,6 +187,8 @@
     <Compile Include="Assets\Scripts\Control\OutOfBounds.cs" />
     <Compile Include="Assets\Scripts\Control\UI\Crosshair.cs" />
     <Compile Include="Assets\Scripts\Control\UI\Health.cs" />
+    <Compile Include="Assets\Scripts\Control\UI\Highscore.cs" />
+    <Compile Include="Assets\Scripts\Control\UI\MenuButton.cs" />
     <Compile Include="Assets\Scripts\Control\UI\ScoreCounter.cs" />
     <Compile Include="Assets\Scripts\Control\UI\Stamina.cs" />
     <Compile Include="Assets\Scripts\Effects\DamageParticle.cs" />
