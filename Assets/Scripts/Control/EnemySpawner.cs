@@ -54,7 +54,7 @@ public class EnemySpawner : GameController {
     public void EnemyDied()
     {
         enemiesAlive--;
-        scoreCounter.UpdateScore(10);
+        UpdateScore(10);
         //score += 10;
         //scoreBoard.text = score.ToString();
     }

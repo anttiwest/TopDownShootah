@@ -183,6 +183,7 @@
     <Compile Include="Assets\Scripts\Control\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\Control\GameController.cs" />
     <Compile Include="Assets\Scripts\Control\Menu.cs" />
+    <Compile Include="Assets\Scripts\Control\MenuRoot.cs" />
     <Compile Include="Assets\Scripts\Control\Misc\InvisbleCollider.cs" />
     <Compile Include="Assets\Scripts\Control\OutOfBounds.cs" />
     <Compile Include="Assets\Scripts\Control\UI\Crosshair.cs" />

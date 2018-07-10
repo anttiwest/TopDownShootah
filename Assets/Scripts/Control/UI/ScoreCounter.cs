@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreCounter : MonoBehaviour {
@@ -11,21 +12,25 @@ public class ScoreCounter : MonoBehaviour {
     {
         this.score = 0;
         this.scoreBoard = GameObject.Find("Score").GetComponent<Text>(); ;
-        this.currentHighscore = PlayerPrefs.GetInt("highscore");
-        Debug.Log("currighscore: " + currentHighscore + ", scoreboard: " + scoreBoard.name);
+        //this.currentHighscore = PlayerPrefs.GetInt("highscore");
+        //Debug.Log("currighscore: " + currentHighscore + ", scoreboard: " + scoreBoard.name);
     }
 
-    public void UpdateScore(int amount)
-    {
-        Debug.Log("SCORE: " + score);
-        score += amount;
-        scoreBoard.text = score.ToString();
+    //public void UpdateScore(int amount)
+    //{
+    //    Debug.Log("SCORE: " + score);
+    //    score += amount;
+    //    scoreBoard.text = score.ToString();
+    //}
 
-        if(score > currentHighscore)
-        {
-            PlayerPrefs.SetInt("highscore", score);
-        }
-
-        
-    }
+    //public void SaveScore(int score)
+    //{
+    //    int i = 0;
+    //    while (PlayerPrefs.HasKey(i.ToString()))
+    //    {
+    //        i++;
+    //    }
+    //    Debug.Log("logging: " + i + ", " + score);
+    //    PlayerPrefs.SetInt(i + "", score);
+    //}
 }

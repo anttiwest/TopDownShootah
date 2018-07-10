@@ -11,17 +11,11 @@ public class Player : Character {
     ParticleSystem damageEffect;
     internal Equipped equipped;
     GoogleMobileAdverts googleMobileAds;
-    
 
     private void Awake()
     {
         damageEffect = GetComponentInChildren<ParticleSystem>();
         health = 100f;
-    }
-
-    void FixedUpdate()
-    {
-        CheckLifeStatus();
     }
     
     private void OnTriggerEnter(Collider other)
@@ -36,13 +30,5 @@ public class Player : Character {
     {
         TakeDamage(amount);
         damageEffect.Play();
-    }
-
-    void CheckLifeStatus()
-    {
-        if(health <= 0)
-        {
-            Die(gameObject);
-        }
     }
 }
